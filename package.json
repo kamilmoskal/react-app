@@ -1,12 +1,13 @@
 {
   "name": "next-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "ssr test app",
   "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "export": "next export",
+    "deploy": "npm run build && npm run export"
   },
   "keywords": [],
   "author": "",
