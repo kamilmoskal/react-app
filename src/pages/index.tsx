@@ -1,12 +1,16 @@
 import { NextPage } from 'next';
 import Link from 'next/link'
-import * as P from 'src/pages/parts';
+import styled from 'styled-components';
+
+export const Wrapper = styled.div`
+    ${({ theme }) => `color: ${theme.primary}`}
+`
 
 const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
-    <P.Wrapper>
+    <Wrapper>
         <h1>Hello world! - user agent: {userAgent}</h1>
         <p><Link href={'/auth'}><a>link to auth</a></Link></p>
-    </P.Wrapper>
+    </Wrapper>
 );
 
 Home.getInitialProps = async ({ req }) => {
