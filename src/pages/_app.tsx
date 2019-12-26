@@ -1,7 +1,7 @@
 import React from 'react'
 import NextApp from 'next/app'
 import { ThemeProvider } from 'styled-components'
-import GlobalStyle from '../src/styles/global-styles'
+import GlobalStyle from 'src/styles/global-styles'
 
 const theme = {
     primary: 'green',
