@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Link from 'next/link'
-import * as P from './parts';
+import * as P from 'src/pages/parts';
 
 const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
     <P.Wrapper>
