@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import Link from 'next/link'
-import styled from 'styled-components';
+import { styled } from 'src/utils/theme';
 
 export const Wrapper = styled.div`
-    ${({ theme }) => `color: ${theme.primary}`}
+    ${({ theme: { secondary } }) => `color: ${secondary.color}`}
 `
 
 const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
