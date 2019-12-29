@@ -1,8 +1,12 @@
+import { Reducer } from 'redux';
 import { combineReducers } from "redux";
-import clockReducer from "./test/reducer";
+import clockReducer, { TestStore } from "./test/reducer";
 
+export interface Store {
+    clock: TestStore
+}
 
-const rootReducer = combineReducers({
+const rootReducer: Reducer<Store> = combineReducers({
     clock: clockReducer,
 });
 

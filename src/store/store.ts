@@ -12,11 +12,10 @@ const bindMiddleware = (middleware: any) => {
   return applyMiddleware(...middleware);
 };
 
-function configureStore(initialState = {}) {
+function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     rootReducer,
-    initialState,
     bindMiddleware([sagaMiddleware])
   );
 

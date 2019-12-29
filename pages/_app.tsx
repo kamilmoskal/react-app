@@ -3,10 +3,12 @@ import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
 import NextApp from 'next/app';
+import { Store } from 'redux';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'src/utils/global-styles';
 import { lightTheme, darkTheme, Theme } from 'src/utils/theme';
 import createStore from 'src/store/store';
+
 interface AppState {
     isDarkTheme: boolean;
     theme: Theme;
@@ -14,7 +16,7 @@ interface AppState {
 
 interface AppProps {
     Component: React.Component;
-    store: any;
+    store: Store;
 }
 
 class App extends NextApp<AppProps, AppState> {
@@ -31,7 +33,6 @@ class App extends NextApp<AppProps, AppState> {
     render() {
         const { theme } = this.state;
         const { Component, pageProps, store } = this.props;
-
 
         return (
             <ThemeProvider theme={theme}>
