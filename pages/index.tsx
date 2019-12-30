@@ -14,9 +14,9 @@ interface IndexPageContext extends NextPageContext {
 IndexPage.getInitialProps = async ({ req, store }: IndexPageContext) => {
     const userAgent = req ? req.headers['user-agent'] || '' : navigator.userAgent;
     store.dispatch(loadData());
-    const { clock: { test } }: RootStore = store.getState();
+    const { clock: { test, data } }: RootStore = store.getState();
 
-    return { userAgent, test };
+    return { userAgent, test, data };
 };
 
 export default IndexPage;

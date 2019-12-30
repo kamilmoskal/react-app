@@ -20,7 +20,7 @@ export function loadData() {
   };
 }
 
-export function loadDataSuccess(data: string) {
+export function loadDataSuccess(data: any) {
   return {
     type: LoadDataActionType.LOAD_DATA_SUCCESS,
     data,

@@ -5,15 +5,16 @@ import { Store } from 'src/store/rootReducer';
 import { connect } from 'react-redux';
 import { TestStore } from 'src/store/test/reducer';
 
-interface HomeOwnProps { userAgent: string }
+interface HomeOwnProps { userAgent: string, data: any }
 type HomeStateProps = TestStore
 export type HomeProps = HomeOwnProps & HomeStateProps
 
-const Home: React.FC<HomeProps> = ({ userAgent, test }) => (
+const Home: React.FC<HomeProps> = ({ userAgent, test, data }) => (
     <P.Wrapper>
         <h1>Hello world! - user agent: {userAgent}</h1>
         <p><Link href={'/auth'}><a>link to auth</a></Link></p>
         <h1>store:{test}</h1>
+        {data && data.results.map((e: any) => <p>{e.original_name}</p>)}
     </P.Wrapper>
 );
 

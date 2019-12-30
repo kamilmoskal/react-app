@@ -1,7 +1,8 @@
 import { LoadDataAction, LoadDataActionType } from "./actions";
 
 export interface TestStore {
-    test: string
+    test: string;
+    data?: any;
 }
 
 const initialState = {
