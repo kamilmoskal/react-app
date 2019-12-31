@@ -5,7 +5,7 @@ import { Store as RootStore } from 'src/store/rootReducer';
 import { loadData } from 'src/store/test/actions';
 import Home, { HomeProps } from 'src/pages/Home/Home';
 
-const IndexPage: NextPage<HomeProps> = Home;
+const IndexPage: NextPage = Home;
 
 interface IndexPageContext extends NextPageContext {
     store: Store,
@@ -25,9 +25,10 @@ IndexPage.getInitialProps = async ({ req, store }: IndexPageContext) => {
             }
         });
     }); */
-
+/* 
     const { clock: { test, data, isLoading } }: RootStore = store.getState();
-    return { userAgent, test, data, isLoading };
+    return { userAgent, test, data, isLoading }; */
+    return {}
 };
 
 export default IndexPage;

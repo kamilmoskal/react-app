@@ -5,21 +5,20 @@ import { Store } from 'src/store/rootReducer';
 import { connect } from 'react-redux';
 import { TestStore } from 'src/store/test/reducer';
 
-interface HomeOwnProps { userAgent?: string }
-type HomeStateProps = TestStore
-export type HomeProps = HomeOwnProps & HomeStateProps
+type HomeStateProps = { data: TestStore}
+export type HomeProps = HomeStateProps
 
-const Home: React.FC<HomeProps> = ({ userAgent, test, data }) => (
+const Home: React.FC<HomeProps> = ({ data }) => (
     <P.Wrapper>
-        <h1>Hello world! - user agent: {userAgent}</h1>
+        <h1>Hello world! - user agent: disable3d</h1>
         <p><Link href={'/auth'}><a>link to auth</a></Link></p>
-        <h1>store:{test}</h1>
-        {data && data.results && data.results.map((result, i) => <p key={i}>{result.original_name}</p>)}
+        <h1>store:{data.test}</h1>
+        {data.data && data.data.results && data.data.results.map((result, i) => <p key={i}>{result.original_name}</p>)}
     </P.Wrapper>
 );
 
-/* const mapStateToProps = (store: Store) => ({
-    test: store.clock.test
+const mapStateToProps = (store: Store) => ({
+    data: store.clock
 })
- */
-export default /* connect(mapStateToProps)( */Home/* ) */
+
+export default  connect(mapStateToProps)(Home);
