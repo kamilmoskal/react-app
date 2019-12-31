@@ -5,7 +5,7 @@ import { Store } from 'src/store/rootReducer';
 import { connect } from 'react-redux';
 import { TestStore } from 'src/store/test/reducer';
 
-interface HomeOwnProps { userAgent: string }
+interface HomeOwnProps { userAgent?: string }
 type HomeStateProps = TestStore
 export type HomeProps = HomeOwnProps & HomeStateProps
 
