@@ -17,9 +17,9 @@ IndexPage.getInitialProps = async ({ req, store }: IndexPageContext) => {
 
     await new Promise((resolve) => {
         const unsubscribe = store.subscribe(() => {
-            const { clock: { data } }: RootStore = store.getState();
+            const { clock: { isLoading } }: RootStore = store.getState();
 
-            if (data) {
+            if (!isLoading) {
                 unsubscribe();
                 resolve();
             }

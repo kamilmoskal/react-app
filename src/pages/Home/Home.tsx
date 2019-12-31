@@ -14,7 +14,7 @@ const Home: React.FC<HomeProps> = ({ userAgent, test, data }) => (
         <h1>Hello world! - user agent: {userAgent}</h1>
         <p><Link href={'/auth'}><a>link to auth</a></Link></p>
         <h1>store:{test}</h1>
-        {data && data.results && data.results.map((result) => <p>{result.original_name}</p>)}
+        {data && data.results && data.results.map((result, i) => <p key={i}>{result.original_name}</p>)}
     </P.Wrapper>
 );
 
