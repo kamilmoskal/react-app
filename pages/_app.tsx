@@ -8,6 +8,9 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'src/utils/global-styles';
 import { lightTheme, darkTheme, Theme } from 'src/utils/theme';
 import createStore from 'src/store/store';
+import { DocumentContext } from 'next/document';
+import { NextPage, NextPageContext, NextComponentType } from 'next';
+import { AppContextType } from 'next/dist/next-server/lib/utils';
 
 interface AppState {
     isDarkTheme: boolean;
@@ -23,6 +26,14 @@ class App extends NextApp<AppProps, AppState> {
     state = {
         isDarkTheme: false,
         theme: lightTheme,
+    }
+
+    static async getInitialProps({ Component, ctx }: any) {
+        const pageProps = Component.getInitialProps
+            ? await Component.getInitialProps(ctx)
+            : {};
+
+        return { pageProps };
     }
 
     toggleTheme = () => this.setState((prevState: AppState) => ({

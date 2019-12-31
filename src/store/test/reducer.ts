@@ -1,20 +1,21 @@
+import { TV_list_on_the_air } from 'src/api/models';
 import { LoadDataAction, LoadDataActionType } from "./actions";
 
 export interface TestStore {
-    test: string;
-    data?: any;
+    isLoading: boolean;
+    test?: string;
+    data?: TV_list_on_the_air;
 }
 
-const initialState = {
-    test: ''
-};
-
-const reducer = (state: TestStore = initialState, action: LoadDataAction) => {
+const reducer = (state: TestStore = { isLoading: false }, action: LoadDataAction) => {
     switch (action.type) {
         case LoadDataActionType.LOAD_DATA:
-            return state
+            return {
+                isLoading: true,
+            }
         case LoadDataActionType.LOAD_DATA_SUCCESS:
             return {
+                isLoading: false,
                 test: 'dziala chyba',
                 data: action.data,
             }

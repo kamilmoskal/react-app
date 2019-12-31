@@ -1,3 +1,5 @@
+import { TV_list_on_the_air } from 'src/api/models';
+import { AxiosError } from 'axios';
 
 export enum LoadDataActionType {
   LOAD_DATA = "LOAD_DATA",
@@ -8,10 +10,10 @@ export type LoadDataAction = {
   type: LoadDataActionType.LOAD_DATA,
 } | {
   type: LoadDataActionType.LOAD_DATA_SUCCESS,
-  data: string,
+  data: TV_list_on_the_air,
 } | {
   type: LoadDataActionType.LOAD_DATA_FAILURE,
-  error: any,
+  error: AxiosError,
 }
 
 export function loadData() {
@@ -20,14 +22,14 @@ export function loadData() {
   };
 }
 
-export function loadDataSuccess(data: any) {
+export function loadDataSuccess(data: TV_list_on_the_air) {
   return {
     type: LoadDataActionType.LOAD_DATA_SUCCESS,
     data,
   };
 }
 
-export function loadDataFailure(error: any) {
+export function loadDataFailure(error: AxiosError) {
   return {
     type: LoadDataActionType.LOAD_DATA_FAILURE,
     error,
