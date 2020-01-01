@@ -8,9 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'src/utils/global-styles';
 import { lightTheme, darkTheme, Theme } from 'src/utils/theme';
 import createStore from 'src/store/store';
-import { DocumentContext } from 'next/document';
-import { NextPage, NextPageContext, NextComponentType } from 'next';
-import { AppContextType } from 'next/dist/next-server/lib/utils';
+import NextNProgress from 'src/utils/nprogress';
 
 interface AppState {
     isDarkTheme: boolean;
@@ -47,6 +45,7 @@ class App extends NextApp<AppProps, AppState> {
 
         return (
             <ThemeProvider theme={theme}>
+                <NextNProgress />
                 <GlobalStyle />
                 <Provider store={store}>
                     <Component {...pageProps} />
