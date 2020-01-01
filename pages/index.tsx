@@ -1,11 +1,10 @@
 import { NextPage, NextPageContext } from 'next';
-import { connect } from 'react-redux';
 import { Store } from 'redux';
 import { Store as RootStore } from 'src/store/rootReducer';
 import { loadData } from 'src/store/test/actions';
-import Home, { HomeProps } from 'src/pages/Home/Home';
+import Home from 'src/pages/Home/Home';
 
-const IndexPage: NextPage<HomeProps> = Home;
+const IndexPage: NextPage = Home;
 
 interface IndexPageContext extends NextPageContext {
     store: Store;
@@ -13,23 +12,13 @@ interface IndexPageContext extends NextPageContext {
 }
 
 IndexPage.getInitialProps = async ({ req, store, isServer }: IndexPageContext) => {
-    console.log(isServer)
-    const userAgent = req ? req.headers['user-agent'] || '' : navigator.userAgent || '';
-    store.dispatch(loadData());
+    const { clock: { data } }: RootStore = store.getState();
 
-    await new Promise((resolve) => {
-        const unsubscribe = store.subscribe(() => {
-            const { clock: { isLoading } }: RootStore = store.getState();
+    if (!data) {
+        store.dispatch(loadData());
+    }
 
-            if (!isLoading) {
-                unsubscribe();
-                resolve();
-            }
-        });
-    });
-
-    const { clock: { test, data, isLoading } }: RootStore = store.getState();
-    return { userAgent, test, data, isLoading };
+    return { isServer };
 };
 
 export default IndexPage;
