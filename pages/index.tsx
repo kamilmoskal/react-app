@@ -1,7 +1,7 @@
 import { NextPage, NextPageContext } from 'next';
 import { Store } from 'redux';
 import { Store as RootStore } from 'src/store/rootReducer';
-import { loadData } from 'src/store/test/actions';
+import { getOnTheAirRequest } from 'src/store/TVShow/OnTheAir/actions';
 import Home from 'src/pages/Home/Home';
 
 const IndexPage: NextPage = Home;
@@ -12,10 +12,10 @@ interface IndexPageContext extends NextPageContext {
 }
 
 IndexPage.getInitialProps = async ({ req, store, isServer }: IndexPageContext) => {
-    const { clock: { data } }: RootStore = store.getState();
+    const { onTheAir: { data } }: RootStore = store.getState();
 
     if (!data) {
-        store.dispatch(loadData());
+        store.dispatch(getOnTheAirRequest());
     }
 
     return { isServer };

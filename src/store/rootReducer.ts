@@ -1,13 +1,14 @@
 import { Reducer } from 'redux';
 import { combineReducers } from "redux";
-import clockReducer, { TestStore } from "./test/reducer";
+import onTheAir from "./TVShow/OnTheAir/reducer";
+import { OnTheAirState } from './TVShow/OnTheAir/constants';
 
 export interface Store {
-    clock: TestStore
+    onTheAir: OnTheAirState
 }
 
 const rootReducer: Reducer<Store> = combineReducers({
-    clock: clockReducer,
+    onTheAir,
 });
 
 export default rootReducer;
