@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { combineReducers } from "redux";
-import onTheAir from "./TVShow/OnTheAir/reducer";
+import onTheAirReducer from "./TVShow/OnTheAir/reducer";
 import { OnTheAirState } from './TVShow/OnTheAir/constants';
 
 export interface Store {
@@ -8,7 +8,7 @@ export interface Store {
 }
 
 const rootReducer: Reducer<Store> = combineReducers({
-    onTheAir,
+    onTheAir: onTheAirReducer,
 });
 
 export default rootReducer;

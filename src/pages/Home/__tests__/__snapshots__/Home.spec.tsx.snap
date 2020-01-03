@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home should render correctly 1`] = `
+.c0 {
+  color: blue;
+}
+
+<div
+  className="c0"
+>
+  <h1>
+    Hello world! - user agent: asd
+  </h1>
+  <p>
+    <a
+      href="/auth"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      link to auth
+    </a>
+  </p>
+  <h1>
+    store:
+  </h1>
+</div>
+`;
