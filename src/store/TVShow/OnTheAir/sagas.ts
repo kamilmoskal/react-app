@@ -5,7 +5,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import * as C from './constants';
 import * as A from './actions';
 
-export function* getOnTheAirWatcher(){
+export function* getOnTheAirWatcher() {
   yield takeLatest<C.OnTheAirAction>(C.OnTheAirActionType.GetOnTheAirRequest, getOnTheAirWorker)
 }
 

@@ -1,40 +1,50 @@
-import { CallEffect, PutEffect, call, put } from "redux-saga/effects";
+import { CallEffect, PutEffect, call, put, ForkEffect, takeLatest } from "redux-saga/effects";
 import { getTVShowListOnTheAir } from 'src/api/requests';
 import * as A from '../actions';
 import * as C from '../constants';
 import * as S from '../sagas';
-import { onTheAirMockData } from './mockData';
+import { onTheAirMockData, mockAxiosError } from './mockData';
+
+describe("getOnTheAirWatcher", () => {
+    test('watching GetOnTheAirRequest action', () => {
+        const saga: IterableIterator<ForkEffect> = S.getOnTheAirWatcher();
+        expect(saga.next().value).toEqual(takeLatest(C.OnTheAirActionType.GetOnTheAirRequest, S.getOnTheAirWorker));
+        expect(saga.next().done).toBe(true);
+    });
+});
 
 describe("getOnTheAirWorker", () => {
-    // let saga: IterableIterator<CallEffect | PutEffect<C.OnTheAirAction>>
+    let saga: any /* IterableIterator<PutEffect<C.OnTheAirAction> | CallEffect> */;
+    let actual: PutEffect<C.OnTheAirAction> | CallEffect;
+    let expected: PutEffect<C.OnTheAirAction> | CallEffect;
 
-    // beforeEach(() => {
-    //     saga = S.getOnTheAirWorker();
-    // })
+    beforeEach(() => {
+        saga = S.getOnTheAirWorker();
+    })
 
-    // test('flow of success scenario', () => {
-    //     let actual: PutEffect<C.OnTheAirAction> | CallEffect = saga.next().value;
-    //     let expected: PutEffect<C.OnTheAirAction> | CallEffect = call(getTVShowListOnTheAir);
+    test('flow of success scenario', () => {
+        actual = saga.next().value;
+        expected = call(getTVShowListOnTheAir);
 
-    //     expect(actual).toEqual(expected);
+        expect(actual).toEqual(expected);
 
-    //     actual = saga.next({ data: onTheAirMockData }).value;
-    //     expected = put(A.getOnTheAirSuccess(onTheAirMockData));
+        actual = saga.next({ data: onTheAirMockData }).value;
+        expected = put(A.getOnTheAirSuccess(onTheAirMockData));
 
-    //     expect(actual).toEqual(expected);
-    //     expect(saga.next().done).toBe(true);
-    // });
+        expect(actual).toEqual(expected);
+        expect(saga.next().done).toBe(true);
+    });
 
     test('flow of fail scenario', () => {
-        // let actual: PutEffect<C.OnTheAirAction> | CallEffect = saga.next().value;
-        // let expected: PutEffect<C.OnTheAirAction> | CallEffect = call(getTVShowListOnTheAir);
+        actual = saga.next().value;
+        expected = call(getTVShowListOnTheAir);
 
-        // expect(actual).toEqual(expected);
+        expect(actual).toEqual(expected);
 
-        // actual = saga.next({ data: onTheAirMockData }).value;
-        // expected = put(A.getOnTheAirSuccess(onTheAirMockData));
+        actual = saga.throw(mockAxiosError).value;
+        expected = put(A.getOnTheAirFail(mockAxiosError));
 
-        // expect(actual).toEqual(expected);
-        // expect(saga.next().done).toBe(true);
+        expect(actual).toEqual(expected);
+        expect(saga.next().done).toBe(true);
     });
 });

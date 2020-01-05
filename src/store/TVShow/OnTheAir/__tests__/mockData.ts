@@ -109,7 +109,7 @@ export const onTheAirMockData: TVShowListOnTheAir = {
     ],
 }
 
-export const mockErrorMessage = 'Request failed with status code 401';
+export const mockErrorMessage: string = 'Request failed with status code 401';
 
 export const mockAxiosError: AxiosError = {
     config: {},
